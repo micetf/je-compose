@@ -11,9 +11,90 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ### À venir
 
-- Page d'accueil Home.jsx (P1.3)
-- Navigation globale avec header persistant (P1.4)
 - Interface enseignant (Phase 3)
+- Dashboard enseignant
+- Gestion de séances
+- Export PDF groupé
+
+---
+
+## [0.4.0] - 2026-02-08
+
+### Ajouté
+
+- **Page Home.jsx** (P1.3) : Page d'accueil complète
+    - Hero section avec gradient et 2 CTA principaux
+    - Section explicative "C'est quoi un acrostiche ?" avec exemple CHAT
+    - Présentation des 3 niveaux de difficulté avec visuels
+    - Workflow détaillé en 3 étapes illustrées (Choisir → Créer → Télécharger)
+    - CTA finale vers création
+    - Footer complet avec navigation
+    - Design responsive et accessible
+- **Composant Header.jsx** (P1.4) : Navigation globale réutilisable
+    - Logo et titre cliquables vers accueil
+    - 3 boutons navigation (Accueil, Créer, Exemples)
+    - Indication visuelle de la page active
+    - Responsive mobile (icônes seules sur petit écran)
+    - Intégrable dans toutes les pages
+- **Routes complètes** : 3/3 routes actives
+    - `/` - Home.jsx (accueil)
+    - `/eleve` - StudentWorkspace.jsx (création)
+    - `/exemples` - Examples.jsx (galerie)
+
+### Modifié
+
+- **README.md** : Mise à jour complète v0.4.0
+    - Badge version 0.4.0
+    - Badge phase "2 (100%)" en vert
+    - Tableau d'avancement : Phase 2 complétée à 100%
+    - Documentation des 3 routes actives
+    - Ajout section "Parcours utilisateur" détaillée
+    - Mise à jour roadmap (Phase 3 en cours)
+    - Métriques du projet actualisées
+- **App.jsx** : Routes activées
+    - Route `/` active vers Home.jsx
+    - Toutes les routes décommentées
+
+### Corrigé
+
+- Erreur ESLint React Hooks dans `AcrosticheEditor.jsx` (ligne 107)
+    - Séparation en 2 `useEffect` distincts (sync data + focus DOM)
+    - Conformité aux règles des Hooks React
+    - Dépendances optimisées
+
+### Phase 2 - Bilan
+
+**✅ Phase 2 : 100% COMPLÉTÉE**
+
+**Composants créés** : 13 composants
+
+- 5 composants communs (Phase 1)
+- 6 composants élève (Phase 2)
+- 1 composant layout (Phase 2)
+- 3 pages complètes (Phase 2)
+
+**Routes fonctionnelles** : 3/3
+
+- Home (accueil pédagogique)
+- StudentWorkspace (création complète)
+- Examples (galerie interactive)
+
+**Parcours élève** : 100% fonctionnel
+
+- Workflow complet en 4 étapes
+- Sauvegarde automatique
+- Export PNG haute résolution
+- Banque de mots thématiques
+- Navigation fluide
+
+**Lignes de code** : ~3 300 lignes
+
+- Home.jsx : 320 lignes
+- StudentWorkspace.jsx : 432 lignes
+- Examples.jsx : 240 lignes
+- Header.jsx : 80 lignes
+-   - 6 composants élève
+-   - Utilitaires et données
 
 ---
 
@@ -182,10 +263,10 @@ Exemple : `1.2.3`
 
 - [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 - [Semantic Versioning](https://semver.org/lang/fr/)
-- [Dépôt GitHub](https://github.com/votre-username/je-compose)
+- [Dépôt GitHub](https://github.com/MiserySGH/je-compose)
 
 ---
 
 **Dernière mise à jour** : 8 février 2026  
-**Version actuelle** : 0.3.0  
-**Prochaine version** : 0.4.0 (fin Phase 2)
+**Version actuelle** : 0.4.0  
+**Prochaine version** : 0.5.0 (Phase 3 - Interface enseignant)

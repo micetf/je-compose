@@ -3,24 +3,25 @@
 Application web éducative pour la création d'acrostiches à l'école primaire (cycles 2 et 3).
 
 ![Statut](https://img.shields.io/badge/statut-en%20développement-yellow)
-![Version](https://img.shields.io/badge/version-0.3.0-blue)
-![Phase](<https://img.shields.io/badge/phase-2%20(67%25)-green>)
+![Version](https://img.shields.io/badge/version-0.4.0-blue)
+![Phase](<https://img.shields.io/badge/phase-2%20(100%25)-green>)
 
 ---
 
 ## 📊 État du projet
 
-| Phase                              | Statut      | Progression | Durée     |
-| ---------------------------------- | ----------- | ----------- | --------- |
-| **Phase 1** - Fondations           | ✅ Complété | 100%        | 4 sem.    |
-| **Phase 2** - Parcours élève       | 🚧 En cours | 67%         | 2/3 sem.  |
-| └─ Données                         | ✅ Complété | 100%        | -         |
-| └─ P1.1 StudentWorkspace           | ✅ Complété | 100%        | 2 jours   |
-| └─ P1.2 Examples                   | ✅ Complété | 100%        | 1 jour    |
-| └─ P1.3 Home                       | ⏳ À venir  | 0%          | 1-2 jours |
-| └─ P1.4 Navigation                 | ⏳ À venir  | 0%          | 1 jour    |
-| **Phase 3** - Interface enseignant | ⏳ À venir  | 0%          | 2-3 sem.  |
-| **Phase 4** - Finalisation         | ⏳ À venir  | 0%          | 2-3 sem.  |
+| Phase                              | Statut      | Progression | Durée    |
+| ---------------------------------- | ----------- | ----------- | -------- |
+| **Phase 1** - Fondations           | ✅ Complété | 100%        | 4 sem.   |
+| **Phase 2** - Parcours élève       | ✅ Complété | 100%        | 3 sem.   |
+| └─ Données                         | ✅ Complété | 100%        | -        |
+| └─ Composants                      | ✅ Complété | 100%        | -        |
+| └─ P1.1 StudentWorkspace           | ✅ Complété | 100%        | 2 jours  |
+| └─ P1.2 Examples                   | ✅ Complété | 100%        | 1 jour   |
+| └─ P1.3 Home                       | ✅ Complété | 100%        | 1 jour   |
+| └─ P1.4 Navigation                 | ✅ Complété | 100%        | 1 jour   |
+| **Phase 3** - Interface enseignant | 🚧 En cours | 0%          | 2-3 sem. |
+| **Phase 4** - Finalisation         | ⏳ À venir  | 0%          | 2-3 sem. |
 
 **Dernière mise à jour** : 8 février 2026
 
@@ -32,7 +33,7 @@ Application web éducative pour la création d'acrostiches à l'école primaire 
 
 ### Fonctionnalités principales
 
-#### ✅ Pour les élèves (MVP)
+#### ✅ Pour les élèves (Phase 2 complétée)
 
 - ✅ Création d'acrostiches en 3 niveaux :
     - 🟢 **Niveau 1** : Un mot par ligne
@@ -44,6 +45,8 @@ Application web éducative pour la création d'acrostiches à l'école primaire 
 - ✅ Export image PNG
 - ✅ Sauvegarde automatique (brouillons)
 - ✅ Galerie de 10 exemples commentés
+- ✅ Page d'accueil pédagogique
+- ✅ Navigation globale fluide
 
 #### ⏳ Pour les enseignants (Phase 3)
 
@@ -69,7 +72,7 @@ npm install -g pnpm
 
 ```bash
 # Cloner le dépôt
-git clone https://github.com/votre-username/je-compose.git
+git clone https://github.com/MiserySGH/je-compose.git
 cd je-compose
 
 # Installer les dépendances
@@ -93,45 +96,63 @@ pnpm lint:fix     # Corriger automatiquement
 
 ---
 
-## 📱 Parcours utilisateur actuel
+## 📱 Parcours utilisateur
+
+### Route `/` - Accueil ✅
+
+**Page d'accueil pédagogique avec :**
+
+- Hero section accueillante avec gradient
+- Explication "C'est quoi un acrostiche ?" avec exemple visuel (CHAT)
+- Présentation des 3 niveaux de difficulté
+- Workflow détaillé en 3 étapes illustrées
+- Multiples CTA vers création et exemples
+- Footer avec navigation complète
 
 ### Route `/eleve` - Espace élève ✅
 
-**Workflow en 4 étapes :**
+**Workflow complet de création en 4 étapes :**
 
 1. **Choix du mot** (3-10 lettres)
 
     - Saisie libre ou suggestions
     - Validation automatique
 
-2. **Choix du niveau**
+2. **Sélection du niveau**
 
-    - 3 niveaux avec explications claires
-    - Navigation retour possible
+    - 3 niveaux détaillés avec exemples
+    - Aide à la décision
 
 3. **Création ligne par ligne**
 
-    - Éditeur avec lettre initiale
-    - Banque de mots par lettre
-    - Aperçu temps réel (sidebar)
-    - Sauvegarde auto toutes les 60s
+    - Éditeur intelligent avec contraintes selon niveau
+    - Banque de mots thématiques filtrables (6 thèmes)
+    - Aide contextuelle par lettre
+    - Navigation entre lignes
+    - Aperçu temps réel en sidebar (desktop)
 
-4. **Finalisation**
+4. **Finalisation et export**
+    - Statistiques de création
     - Export PNG haute résolution
-    - Messages d'encouragement
-    - Options : Modifier / Recommencer / Voir exemples
+    - Messages d'encouragement personnalisés
+    - Option recommencer
+
+**Fonctionnalités transversales :**
+
+- ✅ Sauvegarde automatique toutes les 60 secondes
+- ✅ Reprise de brouillon au chargement
+- ✅ Limite 5 brouillons (FIFO)
 
 ### Route `/exemples` - Galerie d'exemples ✅
 
-- 10 acrostiches modèles (4 niveau 1, 4 niveau 2, 2 niveau 3)
+**Galerie interactive de 10 acrostiches :**
+
+- 4 exemples niveau 1 (un mot par ligne)
+- 4 exemples niveau 2 (phrase courte)
+- 2 exemples niveau 3 (vers poétiques)
 - Filtrage par niveau
-- Modal de détail avec explications
-- CTA vers création
-
-### Route `/` - Accueil ⏳
-
-Actuellement : page temporaire avec CTA  
-**P1.3** : vraie page d'accueil (en développement)
+- Modal détaillé avec explications pédagogiques
+- 5 CTA vers création d'acrostiche
 
 ---
 
@@ -141,11 +162,11 @@ Actuellement : page temporaire avec CTA
 
 - **Frontend** : React 18.3 + Vite 5.1
 - **Styling** : Tailwind CSS 3.4
-- **Routage** : React Router 6.22
-- **State** : Context API + useReducer
-- **Stockage** : localStorage (pas de backend dans MVP)
+- **Routing** : React Router 6.22
+- **State** : Context API + Reducer
+- **Storage** : localStorage (sync multi-onglets)
 - **Export** : html2canvas + jsPDF
-- **Package manager** : pnpm
+- **Package Manager** : pnpm 8.0+
 
 ### Structure du projet
 
@@ -153,197 +174,92 @@ Actuellement : page temporaire avec CTA
 je-compose/
 ├── src/
 │   ├── components/
-│   │   ├── common/              # 5 composants réutilisables ✅
-│   │   │   ├── Button.jsx
-│   │   │   ├── Input.jsx
-│   │   │   ├── Modal.jsx
-│   │   │   ├── Card.jsx
-│   │   │   └── Loading.jsx
-│   │   └── student/             # Composants élève ✅
-│   │       ├── MotInput.jsx
-│   │       ├── NiveauSelector.jsx
-│   │       ├── AcrosticheEditor.jsx
-│   │       ├── WordBank.jsx
-│   │       ├── PreviewPanel.jsx
-│   │       └── ExampleGallery.jsx
-│   ├── contexts/
-│   │   └── AcrosticheContext.jsx  # État global ✅
+│   │   ├── common/         # 5 composants réutilisables
+│   │   ├── student/        # 6 composants élève
+│   │   └── layout/         # Header, Footer
+│   ├── pages/
+│   │   ├── Home.jsx        # ✅ Accueil (320 lignes)
+│   │   ├── StudentWorkspace.jsx  # ✅ Création (432 lignes)
+│   │   └── Examples.jsx    # ✅ Galerie (240 lignes)
+│   ├── context/
+│   │   └── AcrosticheContext.jsx  # État global
 │   ├── hooks/
-│   │   ├── useLocalStorage.js     # Persistance ✅
+│   │   ├── useLocalStorage.js
 │   │   └── useAcrosticheContext.js
 │   ├── utils/
-│   │   ├── acrostiche.js          # 15+ fonctions ✅
-│   │   └── export.js              # Export PNG/PDF ✅
+│   │   ├── acrostiche.js   # 15+ fonctions
+│   │   ├── export.js       # 6 fonctions export
+│   │   └── validation.js
 │   ├── data/
-│   │   ├── exemples.js            # 10 acrostiches ✅
-│   │   └── lexique.js             # ~200 mots ✅
-│   ├── pages/
-│   │   ├── StudentWorkspace.jsx   # ✅ P1.1
-│   │   ├── Examples.jsx           # ✅ P1.2
-│   │   ├── Home.jsx               # ⏳ P1.3
-│   │   └── (teacher/)             # ⏳ Phase 3
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
+│   │   ├── exemples.js     # 10 acrostiches
+│   │   └── lexique.js      # ~200 mots, 6 thèmes
+│   └── App.jsx             # Routes principales
 ├── docs/
-│   └── SRS_V3.0.md               # Spécifications (référence)
-├── README.md
-└── package.json
+│   ├── SRS_V3.0.md         # Spécifications (figé)
+│   ├── ARCHITECTURE.md     # Documentation technique
+│   ├── CHANGELOG.md        # Historique des versions
+│   └── PHASES/             # Documentation phases
+└── README.md               # Ce fichier
 ```
 
-### Fonctionnalités clés implémentées
+### Composants créés (Phase 2)
 
-#### Context API avec reducer ✅
+#### Composants communs (Phase 1)
 
-```javascript
-import { useAcrosticheContext } from "@hooks";
+- `Button` - 4 variantes, 3 tailles
+- `Input` - Validation et messages d'erreur
+- `Modal` - Accessible avec gestion focus
+- `Card` - Flexible avec header/footer
+- `Loading` - 3 tailles, mode fullscreen
 
-const { state, actions } = useAcrosticheContext();
-actions.creerAcrostiche(mot, niveau);
-```
+#### Composants élève (Phase 2)
 
-#### Sauvegarde localStorage ✅
+- `MotInput` - Saisie du mot initial avec validation
+- `NiveauSelector` - Choix du niveau avec descriptions
+- `AcrosticheEditor` - Éditeur ligne par ligne intelligent
+- `WordBank` - Banque de mots avec filtres thématiques
+- `PreviewPanel` - Aperçu temps réel + stats + export
+- `ExampleGallery` - Galerie d'exemples avec filtres
 
-- Auto-sauvegarde toutes les 60s
-- Limite de 5 brouillons (FIFO)
-- Synchronisation multi-onglets
-- Nettoyage automatique données expirées
+#### Composants layout (Phase 2)
 
-#### Export multi-format ✅
-
-```javascript
-import { exporterEnPNG, exporterEnPDF } from "@utils/export";
-
-await exporterEnPNG(element, "mon-acrostiche");
-await exporterEnPDF(acrostiche, "mon-acrostiche");
-```
-
-#### Lexique thématique ✅
-
-```javascript
-import { getMotsParLettre } from "@data/lexique";
-
-const mots = getMotsParLettre("C", 15); // 15 mots en C
-```
+- `Header` - Navigation globale réutilisable
 
 ---
 
-## 🎨 Design système
+## 📦 Données disponibles
 
-### Palette de couleurs
+### Exemples d'acrostiches (10)
 
-- **Primary** : Bleu (#0ea5e9) - Actions principales
-- **Secondary** : Violet (#d946ef) - Accents
-- **Success** : Vert (#10b981) - Feedback positif
-- **Warning** : Orange (#f59e0b) - Alertes
-- **Error** : Rouge (#ef4444) - Erreurs
+| Niveau | Mot                         | Nombre |
+| ------ | --------------------------- | ------ |
+| 1      | CHAT, LUNE, SOLEIL, LIVRE   | 4      |
+| 2      | ÉCOLE, OCÉAN, FORÊT, AMITIÉ | 4      |
+| 3      | LIBERTÉ, COURAGE            | 2      |
 
-### Typographie
+Chaque exemple inclut :
 
-- **Font principale** : Inter (lisibilité optimale)
-- **Font display** : Quicksand (titres enfants)
-- **Line-height** : 1.5-1.6 (confort de lecture)
+- Le texte complet
+- Le niveau
+- Une explication pédagogique
+- Des mots-clés thématiques
 
-### Composants réutilisables
+### Lexique thématique (~200 mots)
 
-```jsx
-// Button
-<Button variant="primary" size="large" onClick={handler}>
-  Créer mon acrostiche
-</Button>
-
-// Input avec validation
-<Input
-  id="mot"
-  label="Ton mot"
-  value={mot}
-  onChange={setMot}
-  error={erreur}
-  maxLength={10}
-/>
-
-// Modal accessible
-<Modal isOpen={isOpen} onClose={close} title="Titre">
-  Contenu
-</Modal>
-
-// Card flexible
-<Card title="Ma carte" hover onClick={handler}>
-  Contenu
-</Card>
-```
-
----
-
-## 📚 Documentation
-
-### Guides disponibles
-
-- **README.md** (ce fichier) - Vue d'ensemble et démarrage
-- **docs/SRS_V3.0.md** - Spécifications complètes (référence)
-- **TASK_P1.1_COMPLETE.md** - Documentation StudentWorkspace
-- **TASK_P1.2_COMPLETE.md** - Documentation Examples
-- **src/data/README.md** - Documentation lexique et exemples (à créer)
-
-### Exemples d'utilisation
-
-#### Créer un acrostiche (code)
-
-```javascript
-import { creerAcrostiche, validerMotAcrostiche } from "@utils/acrostiche";
-
-// Valider le mot
-const { valide, erreur } = validerMotAcrostiche("CHAT");
-
-// Créer l'acrostiche
-if (valide) {
-    const acrostiche = creerAcrostiche("CHAT", 1); // niveau 1
-    // {
-    //   id: "acro_...",
-    //   motInitial: "CHAT",
-    //   niveau: 1,
-    //   vers: ["", "", "", ""],
-    //   statut: "brouillon"
-    // }
-}
-```
-
-#### Utiliser le Context
-
-```javascript
-import useAcrosticheContext from "@hooks/useAcrosticheContext";
-
-function MonComposant() {
-    const { state, actions } = useAcrosticheContext();
-
-    const handleCreate = () => {
-        actions.creerAcrostiche("CHAT", 1);
-    };
-
-    const handleUpdate = (index, contenu) => {
-        actions.modifierLigne(index, contenu);
-    };
-
-    return (
-        <div>
-            {state.acrosticheActuel && (
-                <p>
-                    Progression :{" "}
-                    {state.acrosticheActuel.vers.filter((v) => v).length} lignes
-                </p>
-            )}
-        </div>
-    );
-}
-```
+| Thème       | Nombre de mots |
+| ----------- | -------------- |
+| 🐾 Animaux  | ~80            |
+| 🌳 Nature   | ~60            |
+| ❤️ Émotions | ~35            |
+| 📚 École    | ~40            |
+| 🎨 Couleurs | ~30            |
+| 🏃 Actions  | ~35            |
 
 ---
 
 ## 🧪 Tests
 
-### Tests manuels (MVP)
-
-Le projet utilise actuellement des **tests manuels** uniquement.
+### Tests manuels recommandés
 
 #### Checklist parcours élève
 
@@ -391,16 +307,16 @@ Tests unitaires et E2E prévus pour la finalisation.
 
 ## 🛣️ Roadmap
 
-### Version 0.3.0 (actuelle) - Phase 2 en cours
+### ✅ Version 0.4.0 (actuelle) - Phase 2 complétée
 
 - [x] P1.1 : StudentWorkspace (parcours création)
 - [x] P1.2 : Examples (galerie)
-- [ ] P1.3 : Home (accueil)
-- [ ] P1.4 : Navigation (header persistant)
+- [x] P1.3 : Home (accueil)
+- [x] P1.4 : Navigation (header persistant)
 
-**Livrable** : Parcours élève complet fonctionnel
+**Livrable** : Parcours élève complet et fonctionnel
 
-### Version 0.4.0 - Phase 3 (2-3 semaines)
+### 🚧 Version 0.5.0 - Phase 3 (2-3 semaines)
 
 - [ ] Interface enseignant minimaliste
 - [ ] Création de séances
@@ -454,70 +370,33 @@ Si vous souhaitez participer :
 
 1. **Tester l'application** et remonter les bugs via Issues
 2. **Proposer des améliorations** dans Discussions
-3. **Partager avec des enseignants** pour avoir des retours terrain
-
-### Conventions de code
-
-- **Langue** : Commentaires et variables en français
-- **Style** : ESLint configuré (Airbnb-like)
-- **Commits** : Format conventionnel (`feat:`, `fix:`, `docs:`)
-- **Props** : PropTypes obligatoires sur tous les composants
-- **Imports** : Organisés (React > Libs > @aliases > Relatifs)
-
-### Structure commit
-
-```bash
-feat(scope): description courte
-
-- Point détaillé 1
-- Point détaillé 2
-
-Refs: SRS Phase X, Tâche Y
-```
+3. **Attendre la Phase 4** pour contributions code
 
 ---
 
 ## 📄 Licence
 
-**MIT License** - Projet open source éducatif
-
-Copyright (c) 2026 CPC Mathématiques & Numérique
+À définir (probablement MIT ou similaire pour usage éducatif libre).
 
 ---
 
-## 📞 Contact et support
+## 📞 Contact
 
-- **Développeur** : CPC Mathématiques & Numérique
-- **Repo GitHub** : [github.com/votre-username/je-compose](https://github.com/votre-username/je-compose)
-- **Issues** : Pour les bugs et suggestions
-- **Discussions** : Pour les questions générales
-
----
-
-## 🙏 Remerciements
-
-- **Enseignants testeurs** (à venir en Phase 4)
-- **Communauté React** pour les outils open source
-- **Programmes français cycles 2 et 3** pour le cadre pédagogique
-- **Travaux d'André Tricot** sur la charge cognitive
+**Projet** : Je Compose - Acrostiches pour l'école primaire  
+**Développeur** : CPC Numérique  
+**Usage** : Éducation nationale française (cycles 2 et 3)
 
 ---
 
-## 📈 Statistiques du projet
+## 📚 Documentation complémentaire
 
-```
-Lignes de code :       ~3 500 (src/)
-Composants React :     17
-Fonctions utilitaires : 25+
-Exemples d'acrostiches : 10
-Mots dans le lexique :  ~200
-Routes actives :        2/4
-Tests manuels :         En cours
-```
+- [CHANGELOG.md](./docs/CHANGELOG.md) - Historique des versions
+- [ARCHITECTURE.md](./docs/ARCHITECTURE.md) - Documentation technique
+- [SRS_V3.0.md](./docs/SRS_V3.0.md) - Spécifications détaillées (figé)
+- [PHASES/](./docs/PHASES/) - Documentation par phase
 
 ---
 
-**Version** : 0.3.0 (Phase 2 - 67%)  
 **Dernière mise à jour** : 8 février 2026  
-**Statut** : 🚧 En développement actif  
-**Prochaine étape** : P1.3 - Home.jsx
+**Version actuelle** : 0.4.0  
+**Prochaine version** : 0.5.0 (Phase 3 - Interface enseignant)
