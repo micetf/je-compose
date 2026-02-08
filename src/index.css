@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Styles de base pour l'application */
+@layer base {
+    body {
+        @apply font-sans text-gray-900 bg-gray-50;
+    }
+
+    /* Adaptation pour les jeunes utilisateurs */
+    * {
+        @apply selection:bg-primary-200 selection:text-primary-900;
+    }
+
+    /* Amélioration de la lisibilité pour les enfants */
+    p,
+    li {
+        @apply leading-relaxed;
+    }
+
+    /* Focus visible pour l'accessibilité clavier */
+    *:focus-visible {
+        @apply outline-2 outline-offset-2 outline-primary-500 rounded;
+    }
+}
+
+/* Composants réutilisables */
+@layer components {
+    /* Bouton principal */
+    .btn-primary {
+        @apply px-6 py-3 bg-primary-500 text-white font-medium rounded-xl 
+           hover:bg-primary-600 active:bg-primary-700 
+           transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+
+    .btn-secondary {
+        @apply px-6 py-3 bg-gray-200 text-gray-900 font-medium rounded-xl 
+           hover:bg-gray-300 active:bg-gray-400 
+           transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+
+    .btn-success {
+        @apply px-6 py-3 bg-success text-white font-medium rounded-xl 
+           hover:bg-green-600 active:bg-green-700 
+           transition-colors duration-200;
+    }
+
+    /* Card de base */
+    .card {
+        @apply bg-white rounded-2xl shadow-md p-6 
+           border border-gray-100;
+    }
+
+    /* Input de base */
+    .input-text {
+        @apply w-full px-4 py-3 text-lg
+           border-2 border-gray-300 rounded-xl
+           focus:border-primary-500 focus:ring-0 focus:outline-none
+           transition-colors duration-200
+           placeholder:text-gray-400;
+    }
+
+    /* Badge de niveau */
+    .badge-niveau-1 {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+           bg-green-100 text-green-800;
+    }
+
+    .badge-niveau-2 {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+           bg-orange-100 text-orange-800;
+    }
+
+    .badge-niveau-3 {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+           bg-red-100 text-red-800;
+    }
+}
+
+/* Utilitaires personnalisés */
+@layer utilities {
+    /* Animation simple pour les feedbacks */
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Conteneur responsive centré */
+    .container-app {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    /* Mise en page pour mode TBI (grand écran) */
+    @media (min-width: 1536px) {
+        .tbi-mode {
+            @apply text-2xl;
+        }
+    }
+}

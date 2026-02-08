@@ -1,0 +1,49 @@
+{
+    "name": "je-compose",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "description": "Application web pour créer des acrostiches à l'école primaire",
+    "author": "CPC Mathématiques & Numérique",
+    "license": "MIT",
+    "keywords": [
+        "education",
+        "acrostiche",
+        "poesie",
+        "ecole-primaire",
+        "react",
+        "vite"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+        "lint:fix": "eslint . --ext js,jsx --fix"
+    },
+    "dependencies": {
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-router-dom": "^6.22.0",
+        "prop-types": "^15.8.1",
+        "html2canvas": "^1.4.1",
+        "jspdf": "^2.5.1"
+    },
+    "devDependencies": {
+        "@types/react": "^18.3.1",
+        "@types/react-dom": "^18.3.0",
+        "@vitejs/plugin-react": "^4.3.0",
+        "autoprefixer": "^10.4.17",
+        "eslint": "^8.57.0",
+        "eslint-plugin-react": "^7.34.0",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.4.5",
+        "postcss": "^8.4.35",
+        "tailwindcss": "^3.4.1",
+        "vite": "^5.1.4"
+    },
+    "engines": {
+        "node": ">=18.0.0",
+        "pnpm": ">=8.0.0"
+    }
+}
