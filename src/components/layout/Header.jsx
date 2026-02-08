@@ -98,6 +98,26 @@ const Header = ({ showNavigation = true, className = "" }) => {
                                     Exemples
                                 </span>
                             </button>
+
+                            <button
+                                onClick={() => navigate("/enseignant")}
+                                className={`
+                px-4 py-2 rounded-lg font-medium transition-all duration-200
+                ${
+                    isActive("/enseignant")
+                        ? "bg-primary-500 text-white shadow-md"
+                        : "text-gray-700 hover:bg-gray-100"
+                }
+            `}
+                                aria-current={
+                                    isActive("/enseignant") ? "page" : undefined
+                                }
+                            >
+                                👨‍🏫{" "}
+                                <span className="hidden sm:inline">
+                                    Enseignant
+                                </span>
+                            </button>
                         </nav>
                     )}
                 </div>

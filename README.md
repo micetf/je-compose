@@ -3,8 +3,8 @@
 Application web éducative pour la création d'acrostiches à l'école primaire (cycles 2 et 3).
 
 ![Statut](https://img.shields.io/badge/statut-en%20développement-yellow)
-![Version](https://img.shields.io/badge/version-0.4.0-blue)
-![Phase](<https://img.shields.io/badge/phase-2%20(100%25)-green>)
+![Version](https://img.shields.io/badge/version-0.5.0-blue)
+![Phase](<https://img.shields.io/badge/phase-3%20(100%25)-green>)
 
 ---
 
@@ -20,7 +20,14 @@ Application web éducative pour la création d'acrostiches à l'école primaire 
 | └─ P1.2 Examples                   | ✅ Complété | 100%        | 1 jour   |
 | └─ P1.3 Home                       | ✅ Complété | 100%        | 1 jour   |
 | └─ P1.4 Navigation                 | ✅ Complété | 100%        | 1 jour   |
-| **Phase 3** - Interface enseignant | 🚧 En cours | 0%          | 2-3 sem. |
+| **Phase 3** - Interface enseignant | ✅ Complété | 100%        | 2 sem.   |
+| └─ P3.1 Utilitaires séances        | ✅ Complété | 100%        | 1 jour   |
+| └─ P3.2 SessionCreate              | ✅ Complété | 100%        | 1 jour   |
+| └─ P3.3 Système partage            | ✅ Complété | 100%        | 1 jour   |
+| └─ P3.4 SessionView                | ✅ Complété | 100%        | 1 jour   |
+| └─ P3.5 Export PDF                 | ✅ Complété | 100%        | 1 jour   |
+| └─ P3.6 TeacherDashboard           | ✅ Complété | 100%        | 1 jour   |
+| └─ P3.7 Navigation                 | ✅ Complété | 100%        | 1 jour   |
 | **Phase 4** - Finalisation         | ⏳ À venir  | 0%          | 2-3 sem. |
 
 **Dernière mise à jour** : 8 février 2026
@@ -48,11 +55,41 @@ Application web éducative pour la création d'acrostiches à l'école primaire 
 - ✅ Page d'accueil pédagogique
 - ✅ Navigation globale fluide
 
-#### ⏳ Pour les enseignants (Phase 3)
+#### ✅ Pour les enseignants (Phase 3 complétée)
 
-- ⏳ Création de séances simples
-- ⏳ Consultation des productions élèves
-- ⏳ Export PDF groupé
+**Gestion de séances**
+
+- ✅ Création de séances avec code unique (6 caractères)
+- ✅ Durée configurable (1-7 jours, 24h par défaut)
+- ✅ URL de partage automatique pour les élèves
+- ✅ Liste des séances actives avec temps restant
+
+**Réception des productions**
+
+- ✅ Système de partage élève → enseignant via URL
+- ✅ Réception automatique (clic sur lien)
+- ✅ Stockage local par code séance
+
+**Consultation et filtrage**
+
+- ✅ Affichage en grille avec aperçu (3 premières lignes)
+- ✅ Filtres par niveau (1, 2, 3)
+- ✅ Tri par date, nom élève, ou mot initial
+- ✅ Modal de détail (acrostiche complet formaté)
+- ✅ Statistiques en temps réel (total, par niveau)
+
+**Export et gestion**
+
+- ✅ Sélection multiple avec checkboxes
+- ✅ Export PDF groupé (1 acrostiche/page A4)
+- ✅ Suppression individuelle ou en masse
+- ✅ Nom fichier automatique (séance + date)
+
+**Interface**
+
+- ✅ Dashboard avec 3 onglets (Créer | Consulter | Mes séances)
+- ✅ Navigation fluide entre fonctionnalités
+- ✅ Bouton "Enseignant" dans header global
 
 ---
 
@@ -167,6 +204,9 @@ pnpm lint:fix     # Corriger automatiquement
 - **Storage** : localStorage (sync multi-onglets)
 - **Export** : html2canvas + jsPDF
 - **Package Manager** : pnpm 8.0+
+- **Gestion séances** : localStorage avec nettoyage auto
+- **Partage productions** : URL encodées (base64)
+- **Export PDF** : jsPDF (déjà présent, maintenant utilisé côté enseignant)
 
 ### Structure du projet
 
@@ -284,6 +324,55 @@ Tests unitaires et E2E prévus pour la finalisation.
 
 ---
 
+## 📊 Métriques du projet
+
+### Lignes de code
+
+```
+Total :                  ~5 500 lignes
+├─ Phase 1 :             ~1 500 lignes
+├─ Phase 2 :             ~1 850 lignes
+└─ Phase 3 :             ~2 150 lignes
+```
+
+### Composants
+
+```
+Total :                  20 composants
+├─ Common :              5  (Phase 1)
+├─ Student :             6  (Phase 2)
+├─ Teacher :             3  (Phase 3)
+└─ Layout :              1  (Phase 2)
+```
+
+### Pages et routes
+
+```
+Pages créées :           4/4
+├─ Home                  ✅ (320 lignes)
+├─ StudentWorkspace      ✅ (432 lignes)
+├─ Examples              ✅ (240 lignes)
+└─ TeacherDashboard      ✅ (330 lignes)
+
+Routes actives :         4/4
+├─ /                     ✅ Accueil
+├─ /eleve                ✅ Création
+├─ /exemples             ✅ Galerie
+└─ /enseignant           ✅ Interface enseignant
+```
+
+### Fichiers utilitaires
+
+```
+Total :                  4 fichiers
+├─ acrostiche.js         ✅ (Phase 1)
+├─ export.js             ✅ (Phase 2)
+├─ session.js            ✅ (Phase 3)
+└─ partage.js            ✅ (Phase 3)
+```
+
+---
+
 ## 🚧 Limitations connues (MVP)
 
 ### Volontaires (scope MVP)
@@ -316,26 +405,29 @@ Tests unitaires et E2E prévus pour la finalisation.
 
 **Livrable** : Parcours élève complet et fonctionnel
 
-### 🚧 Version 0.5.0 - Phase 3 (2-3 semaines)
+### ✅ Version 0.5.0 - Phase 3 complétée
 
-- [ ] Interface enseignant minimaliste
-- [ ] Création de séances
-- [ ] Consultation productions
-- [ ] Export PDF groupé
-- [ ] Système de codes séance
+- [x] P3.1 : Utilitaires séances (codes, gestion)
+- [x] P3.2 : SessionCreate (création séances)
+- [x] P3.3 : Système partage (élève → enseignant)
+- [x] P3.4 : SessionView (consultation productions)
+- [x] P3.5 : Export PDF groupé
+- [x] P3.6 : TeacherDashboard (interface complète)
+- [x] P3.7 : Navigation (bouton enseignant)
 
 **Livrable** : MVP complet élève + enseignant
 
-### Version 1.0.0 - Phase 4 (2-3 semaines)
+### 🚧 Version 1.0.0 - Phase 4 (en cours)
 
 - [ ] Tests manuels complets
 - [ ] Responsive final (tablette + desktop)
-- [ ] Corrections bugs
-- [ ] Documentation utilisateur (PDF)
+- [ ] Corrections bugs identifiés
+- [ ] Polish UX/UI
+- [ ] Documentation utilisateur
 - [ ] Déploiement production
-- [ ] Vidéo démo 3 min
+- [ ] Vidéo démo
 
-**Livrable** : Application déployée et utilisable
+**Livrable** : Application déployée et utilisable en classe
 
 ### Versions futures (post-MVP)
 
@@ -398,5 +490,5 @@ Si vous souhaitez participer :
 ---
 
 **Dernière mise à jour** : 8 février 2026  
-**Version actuelle** : 0.4.0  
-**Prochaine version** : 0.5.0 (Phase 3 - Interface enseignant)
+**Version actuelle** : 0.5.0  
+**Prochaine version** : 1.0.0 (Phase 4 - Finalisation)

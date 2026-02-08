@@ -9,7 +9,12 @@ import {
 import { Button, Card, Loading } from "@components/common";
 import useAcrosticheContext from "@hooks/useAcrosticheContext";
 import { estAcrosticheComplet } from "@utils/acrostiche";
-
+import {
+    urlContientSession,
+    extraireParametresURL,
+    genererURLPartage,
+    copierURLPartage,
+} from "@utils/partage";
 /**
  * Page principale de l'espace élève
  * Gère le workflow complet de création d'un acrostiche en 4 étapes
@@ -24,6 +29,13 @@ const StudentWorkspace = () => {
     const [niveauChoisi, setNiveauChoisi] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
+    // États pour le système de séance
+    const [codeSeance, setCodeSeance] = useState(null);
+    const [modeSeance, setModeSeance] = useState(false);
+    const [urlPartage, setURLPartage] = useState(null);
+    const [urlCopiee, setURLCopiee] = useState(false);
+    const [nomEleve, setNomEleve] = useState("");
+
     // Charger un brouillon existant si disponible
     useEffect(() => {
         if (
@@ -36,6 +48,31 @@ const StudentWorkspace = () => {
             setEtapeActuelle(3); // Aller directement à l'édition
         }
     }, [state.acrosticheActuel]);
+
+    // Détecter si l'élève arrive via un lien de séance
+    useEffect(() => {
+        const params = extraireParametresURL();
+        if (params && params.codeSeance) {
+            setCodeSeance(params.codeSeance);
+            setModeSeance(true);
+        }
+    }, []);
+
+    // Génération de l'URL de partage après finalisation
+    useEffect(() => {
+        if (
+            modeSeance &&
+            codeSeance &&
+            state.acrosticheActuel?.statut === "termine"
+        ) {
+            const url = genererURLPartage(
+                state.acrosticheActuel,
+                codeSeance,
+                nomEleve
+            );
+            setURLPartage(url);
+        }
+    }, [state.acrosticheActuel, modeSeance, codeSeance, nomEleve]);
 
     // Étape 1 : Validation du mot
     const handleMotValide = (mot) => {
@@ -83,6 +120,17 @@ const StudentWorkspace = () => {
         setEtapeActuelle(1);
     };
 
+    // Copier l'URL de partage dans le presse-papier
+    const handleCopierURLPartage = async () => {
+        if (!urlPartage) return;
+
+        const success = await copierURLPartage(urlPartage);
+        if (success) {
+            setURLCopiee(true);
+            setTimeout(() => setURLCopiee(false), 2000);
+        }
+    };
+
     // Vérifier si l'acrostiche est complet (pour navigation étape 3 → 4)
     const acrosticheEstComplet =
         state.acrosticheActuel && estAcrosticheComplet(state.acrosticheActuel);
@@ -117,6 +165,15 @@ const StudentWorkspace = () => {
                                 ✍️ Je compose mon acrostiche
                             </h1>
                         </div>
+
+                        {/* Indicateur de séance */}
+                        {modeSeance && codeSeance && (
+                            <div className="mt-2 flex items-center justify-center gap-2">
+                                <span className="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
+                                    📋 Séance : {codeSeance}
+                                </span>
+                            </div>
+                        )}
 
                         {/* Indicateur d'étapes */}
                         <div className="hidden md:flex items-center gap-2">
@@ -379,6 +436,105 @@ const StudentWorkspace = () => {
                                                         Retour à l'édition
                                                     </Button>
                                                 </div>
+
+                                                {/* Section partage enseignant - VERSION SÉCURISÉE */}
+                                                {modeSeance &&
+                                                    codeSeance &&
+                                                    etapeActuelle === 4 && (
+                                                        <div className="p-4 bg-indigo-50 rounded-lg border-l-4 border-indigo-400 space-y-3">
+                                                            <p className="text-indigo-800 font-medium">
+                                                                📤 Partager avec
+                                                                l'enseignant
+                                                            </p>
+
+                                                            {/* Input nom élève */}
+                                                            <div>
+                                                                <label
+                                                                    htmlFor="nom-eleve"
+                                                                    className="block text-sm font-medium text-gray-700 mb-2"
+                                                                >
+                                                                    Ton prénom
+                                                                    (optionnel)
+                                                                </label>
+                                                                <input
+                                                                    id="nom-eleve"
+                                                                    type="text"
+                                                                    value={
+                                                                        nomEleve
+                                                                    }
+                                                                    onChange={(
+                                                                        e
+                                                                    ) =>
+                                                                        setNomEleve(
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        )
+                                                                    }
+                                                                    placeholder="Ex: Marie"
+                                                                    maxLength={
+                                                                        30
+                                                                    }
+                                                                    className="w-full px-4 py-3 text-lg border-2 rounded-xl border-gray-300 focus:border-primary-500 focus:outline-none transition-colors duration-200"
+                                                                />
+                                                            </div>
+
+                                                            {/* URL de partage */}
+                                                            <div className="space-y-2">
+                                                                <p className="text-indigo-700 text-sm">
+                                                                    Copie ce
+                                                                    lien et
+                                                                    envoie-le à
+                                                                    ton
+                                                                    enseignant(e)
+                                                                    :
+                                                                </p>
+                                                                {urlPartage ? (
+                                                                    <div className="flex gap-2">
+                                                                        <input
+                                                                            type="text"
+                                                                            value={
+                                                                                urlPartage
+                                                                            }
+                                                                            readOnly
+                                                                            className="flex-1 px-3 py-2 bg-white border border-indigo-300 rounded-lg text-xs font-mono text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                                            onClick={(
+                                                                                e
+                                                                            ) =>
+                                                                                e.target.select()
+                                                                            }
+                                                                        />
+                                                                        <Button
+                                                                            variant={
+                                                                                urlCopiee
+                                                                                    ? "success"
+                                                                                    : "secondary"
+                                                                            }
+                                                                            size="small"
+                                                                            onClick={
+                                                                                handleCopierURLPartage
+                                                                            }
+                                                                        >
+                                                                            {urlCopiee
+                                                                                ? "✓ Copié"
+                                                                                : "📋"}
+                                                                        </Button>
+                                                                    </div>
+                                                                ) : (
+                                                                    <div className="px-4 py-3 bg-white border border-indigo-200 rounded-lg">
+                                                                        <p className="text-sm text-gray-600">
+                                                                            ⏳
+                                                                            Génération
+                                                                            du
+                                                                            lien
+                                                                            en
+                                                                            cours...
+                                                                        </p>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    )}
 
                                                 <div className="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-400">
                                                     <p className="text-purple-800 font-medium mb-2">
