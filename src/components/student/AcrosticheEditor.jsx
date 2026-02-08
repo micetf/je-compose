@@ -19,19 +19,21 @@ const AcrosticheEditor = ({ acrostiche, onComplete }) => {
     const [showWordBank, setShowWordBank] = useState(false);
     const [contenuEdite, setContenuEdite] = useState("");
 
-    // Auto-focus et réinitialisation du contenu quand la ligne change
-    // Note: setState ici est intentionnel pour synchroniser l'UI avec le changement de ligne
+    // Synchroniser le contenu édité avec la ligne active de l'acrostiche
+    useEffect(() => {
+        if (acrostiche?.vers) {
+            setContenuEdite(acrostiche.vers[ligneActive] || "");
+            setErreur("");
+        }
+    }, [ligneActive, acrostiche?.vers]);
+
+    // Auto-focus sur l'input quand la ligne change
     useEffect(() => {
         const input = document.getElementById("ligne-input");
         if (input) {
             input.focus();
         }
-        // Réinitialiser le contenu quand on change de ligne
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setContenuEdite(acrostiche?.vers[ligneActive] || "");
-        setErreur("");
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-    }, [ligneActive, acrostiche]);
+    }, [ligneActive]);
 
     if (!acrostiche) {
         return null;
