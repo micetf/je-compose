@@ -3,7 +3,7 @@ import { AcrosticheProvider } from "@contexts";
 
 // Import des pages
 import StudentWorkspace from "./pages/StudentWorkspace";
-// import Examples from './pages/Examples';
+import Examples from "./pages/Examples";
 // import Home from './pages/Home';
 // import TeacherDashboard from './pages/TeacherDashboard';
 
@@ -60,7 +60,7 @@ function App() {
 
                     {/* Routes élève */}
                     <Route path="/eleve" element={<StudentWorkspace />} />
-                    {/* <Route path="/exemples" element={<Examples />} /> */}
+                    <Route path="/exemples" element={<Examples />} />
 
                     {/* Routes enseignant (Phase 3) */}
                     {/* <Route path="/enseignant" element={<TeacherDashboard />} /> */}
