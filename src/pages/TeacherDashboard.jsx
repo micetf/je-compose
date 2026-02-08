@@ -8,7 +8,6 @@ import {
     formatterTempsRestant,
     genererURLSeance,
 } from "@utils/session";
-import { obtenirStatistiquesSeances } from "@utils/session";
 import { recupererProductionsSeance } from "@utils/partage";
 
 /**

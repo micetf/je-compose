@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { Button, Card, Input, Modal } from "@components/common";
 import {
@@ -84,7 +84,7 @@ const SessionView = ({ codeSeance: codeSeanceProp }) => {
         if (codeSeance) {
             chargerProductions();
         }
-    }, [codeSeance]);
+    }, [codeSeance, chargerProductions]);
 
     /**
      * Charge les informations de la séance
@@ -104,10 +104,10 @@ const SessionView = ({ codeSeance: codeSeanceProp }) => {
     /**
      * Charge les productions de la séance
      */
-    const chargerProductions = () => {
+    const chargerProductions = useCallback(() => {
         const prods = recupererProductionsSeance(codeSeance);
         setProductions(prods);
-    };
+    }, [codeSeance]);
 
     /**
      * Gère la soumission du formulaire de code
